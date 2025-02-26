@@ -1,5 +1,41 @@
-import { FC, useId } from "react";
+import { FC, useId, useState, useRef } from "react";
+
 import styled from "styled-components";
+import styles from "./index.module.scss";
+import {motion} from 'framer-motion'
+
+import { X_button } from "../../buttons/closeButtons/x-button/X-button";
+
+const StyledFIeldset = styled.fieldset<{ isError: boolean }>`
+  border-top: 2px solid ${({ isError }) => (isError ? "#eb5252" : "#a6a6a6")};
+  border-radius: 2px;
+  display: inline-block;
+  padding: 0px 30px 0px 15px;
+  color: ${({ isError }) => (isError ? "#eb5252" : "inherit")};
+  font-weight: ${({ isError }) => (isError ? "600" : "inherit")};
+`;
+
+const StyledInput = styled.input<{
+  isError: boolean;
+  height: number;
+  width: number;
+}>`
+  background-color: #fff;
+  border: 2px solid ${({ isError }) => (isError ? "#eb5252" : "#a6a6a6")};
+  border-radius: 4px;
+  color: ${({ isError }) => (isError ? "rgb(125, 48, 48)" : "black")};
+  padding: 8px;
+  height: ${({ height }) => height}px;
+  width: ${({ width }) => width}px;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: ${({ isError }) => (isError ? "#eb5252" : "#a6a6a6")};
+  }
+
+  ${({ isError }) =>
+    isError ? "" : "&:focus-visible {border: 2px solid #73a2ff;}"}
+`;
 
 interface stylesInput {
   isError: boolean;
@@ -13,70 +49,44 @@ export const DefaultInput: FC<stylesInput> = ({
   isError,
   title,
   placeHolder,
-  height,
-  width,
+  height = 30,
+  width = 200,
 }) => {
+  const [inputValue, setInputValue] = useState<string>("");
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const inputId = useId();
 
-  const defHeight: number = height || 30;
-  const defWidth: number = width || 200;
+  const clearInputValue = () => {
+    setInputValue("");
+    inputRef.current?.focus();
+  };
 
-  if (!isError) {
-    var StyledFIeldset = styled.fieldset`
-    border-top: 2px solid #a6a6a6;
-    border-radius: 2px;
-    display: inline-block;
-    padding: 0px 15px 0px 15px;
-    `
-
-    var StyledInput = styled.input`
-      background-color: #fff;
-      border: 2px solid #a6a6a6;
-      border-radius: 4px;
-      color: black;
-      padding: 8px;
-      height: ${defHeight}px;
-      width: ${defWidth}px;
-      transition: all 0.2s ease;
-      &::placeholder {
-        color: #a6a6a6;
-      }
-      &:focus-visible {
-        border: 2px solid #73a2ff;
-      }
-    `;
-  } else{
-    var StyledFIeldset = styled.fieldset`
-    border-top: 2px solid #EB5252;
-    border-radius: 2px;
-    color: #EB5252;
-    display: inline-block;
-    font-weight: 600;
-    padding: 0px 15px 0px 15px;
-    `
-
-    var StyledInput = styled.input`
-    background-color: #fff;
-    border: 2px solid #EB5252;
-    border-radius: 4px;
-    color:rgb(125, 48, 48);
-    padding: 8px;
-    height: ${defHeight}px;
-    width: ${defWidth}px;
-    transition: all 0.2s ease;
-    &::placeholder{
-    color: #EB5252;
-    }
-    `
-  }
   return (
-    <>
-      <StyledFIeldset>
-        <legend>
-          <label htmlFor={inputId}>{title}</label>
-        </legend>
-        <StyledInput id={inputId} placeholder={placeHolder} />
-      </StyledFIeldset>
-    </>
+    <StyledFIeldset isError={isError} className={styles.container}>
+      <legend>
+        <label htmlFor={inputId}>{title}</label>
+      </legend>
+      <StyledInput
+        ref={inputRef}
+        id={inputId}
+        placeholder={placeHolder}
+        value={inputValue}
+        isError={isError}
+        height={height}
+        width={width}
+        onChange={(e) => {
+          setInputValue(e.target.value);
+        }}
+      />
+      {inputValue && <motion.div 
+      className={styles.closeBTN}
+      animate={{
+      }}
+      >
+        <X_button funcToClose={clearInputValue} />
+      </motion.div>}
+    </StyledFIeldset>
   );
 };
