@@ -2,7 +2,7 @@ import { FC, useId, useState, useRef } from "react";
 
 import styled from "styled-components";
 import styles from "./index.module.scss";
-import {motion} from 'framer-motion'
+import {motion, AnimatePresence} from 'framer-motion'
 
 import { X_button } from "../../buttons/closeButtons/x-button/X-button";
 
@@ -80,13 +80,25 @@ export const DefaultInput: FC<stylesInput> = ({
           setInputValue(e.target.value);
         }}
       />
+      <AnimatePresence>
       {inputValue && <motion.div 
       className={styles.closeBTN}
+      initial={{
+        opacity: 0,
+        scale: 0.5,
+      }}
       animate={{
+        opacity: 1,
+        scale: 1,
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0.5,
       }}
       >
         <X_button funcToClose={clearInputValue} />
       </motion.div>}
+      </AnimatePresence>
     </StyledFIeldset>
   );
 };
