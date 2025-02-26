@@ -39,9 +39,14 @@ export const DefaultButton: FC<stylesButton> = ({
       width: ${defWidth}px;
       height: ${defHeight}px;
       transition: all 0.2s ease;
+      box-shadow: 0px 3px ${colors.seaBlue};
       &:hover {
         background: ${"#0026CA"};
       }
+        &:active{
+        box-shadow: 0px 0px ${colors.seaBlue};
+        transform: translateY(3px);
+        }
     `;
   } else {
     var Button = styled.button`
@@ -53,9 +58,6 @@ export const DefaultButton: FC<stylesButton> = ({
       width: ${defWidth}px;
       height: ${defHeight}px;
       transition: all 0.2s ease;
-      &:hover{
-      box-shadow: 0px 1px 2px ${colors.disabledColor}, inset 0px 0px 4px ${colors.disabledColor};
-      }
     `;
   }
   return (

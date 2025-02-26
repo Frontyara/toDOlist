@@ -1,0 +1,20 @@
+.link{
+    color: black;
+    padding: 13px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &:-webkit-any-link:active {
+        color: inherit;
+        background-color: rgb(213, 213, 213);
+    }
+}
+.icon{
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 2px;
+}

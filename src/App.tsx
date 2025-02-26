@@ -1,12 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
 import "./App.scss";
-import { DefaultInput } from "./shared/inputs/defaultInput";
+import { Navigation } from "./widgets/navBar";
+import { navLinks } from "./widgets/navBar/navLinks-data";
 
 function App() {
   return (
-    <>
-    <DefaultInput isError={false} title="titleexp" placeHolder="this place"/>
-    <DefaultInput isError={true} title="titleexp" placeHolder="this place"/>
-    </>
+    <div className="layout">
+      <BrowserRouter>
+        <Navigation itemsLinks={navLinks} />
+      </BrowserRouter>
+    </div>
   );
 }
 
