@@ -2,5 +2,5 @@
     min-height: 100vh;
     min-width: 100vw;
     display: grid;
-    grid-template: auto/250px auto;
+    grid-template: auto/250px calc(100vw - 250px);
 }
