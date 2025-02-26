@@ -6,7 +6,13 @@ import {motion, AnimatePresence} from 'framer-motion'
 
 import { X_button } from "../../buttons/closeButtons/x-button/X-button";
 
-const StyledFIeldset = styled.fieldset<{ isError: boolean }>`
+interface styleComponents {
+  isError: boolean;
+  height?: number;
+  width?: number;
+}
+
+const StyledFIeldset = styled.fieldset<styleComponents>`
   border-top: 2px solid ${({ isError }) => (isError ? "#eb5252" : "#a6a6a6")};
   border-radius: 2px;
   display: inline-block;
@@ -15,11 +21,7 @@ const StyledFIeldset = styled.fieldset<{ isError: boolean }>`
   font-weight: ${({ isError }) => (isError ? "600" : "inherit")};
 `;
 
-const StyledInput = styled.input<{
-  isError: boolean;
-  height: number;
-  width: number;
-}>`
+const StyledInput = styled.input<styleComponents>`
   background-color: #fff;
   border: 2px solid ${({ isError }) => (isError ? "#eb5252" : "#a6a6a6")};
   border-radius: 4px;
@@ -37,7 +39,7 @@ const StyledInput = styled.input<{
     isError ? "" : "&:focus-visible {border: 2px solid #73a2ff;}"}
 `;
 
-interface stylesInput {
+interface DefaultInputProps {
   isError: boolean;
   title: string;
   placeHolder: string;
@@ -45,7 +47,7 @@ interface stylesInput {
   width?: number;
 }
 
-export const DefaultInput: FC<stylesInput> = ({
+export const DefaultInput: FC<DefaultInputProps> = ({
   isError,
   title,
   placeHolder,
