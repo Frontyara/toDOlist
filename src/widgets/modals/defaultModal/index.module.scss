@@ -1,0 +1,20 @@
+.wrapper{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.774);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: grid;
+    grid-template: 1fr 20fr 1fr / repeat(3, 1fr);
+}
+.modal{
+    background-color: #fff;
+    grid-area: 2/2/3/3;
+    padding: 20px 25px;
+    overflow-y: auto;
+    header{
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+}

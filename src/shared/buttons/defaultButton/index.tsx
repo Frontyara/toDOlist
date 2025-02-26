@@ -3,6 +3,7 @@ import styled from "styled-components";
 import colors from "../../sharedOfShared/colors";
 
 interface stylesButton {
+  fontSize?: number;
   background?: string;
   border?: string;
   color?: string;
@@ -14,6 +15,7 @@ interface stylesButton {
 }
 
 export const DefaultButton: FC<stylesButton> = ({
+  fontSize,
   background,
   border,
   isDisabled,
@@ -23,6 +25,7 @@ export const DefaultButton: FC<stylesButton> = ({
   height,
   onClick,
 }) => {
+  const fontSizeP = fontSize || 'auto'
   const defBackground = background || colors.deepBlue;
   const defBorder = border || "none";
   const defColor = color || colors.white;
@@ -36,6 +39,7 @@ export const DefaultButton: FC<stylesButton> = ({
       border-radius: 10px;
       color: ${defColor};
       font-weight: 600;
+      font-size: ${fontSizeP}px;
       width: ${defWidth}px;
       height: ${defHeight}px;
       transition: all 0.2s ease;
@@ -55,6 +59,7 @@ export const DefaultButton: FC<stylesButton> = ({
       border-radius: 10px;
       color: ${colors.disabledColor};
       font-weight: 600;
+      font-size: ${fontSizeP}px;
       width: ${defWidth}px;
       height: ${defHeight}px;
       transition: all 0.2s ease;

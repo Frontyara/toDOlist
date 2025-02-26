@@ -5,6 +5,7 @@ import indexIcon from "../../../public/indexIcon.svg";
 
 import { iNavLinks } from "./navLinks-data";
 import { NavLink } from "react-router-dom";
+import { DefaultButton } from "../../shared/buttons/defaultButton";
 
 interface iItemsLinks {
   itemsLinks: iNavLinks[];
@@ -29,6 +30,9 @@ export const Navigation: FC<iItemsLinks> = (props) => {
           />
         );
       })}
+      <div className={styles.BTNsContainer}>
+      <DefaultButton fontSize={30} text="+" width={45} height={45} onClick={() => {}} isDisabled={false}/>
+      </div>
     </div>
   );
 };
